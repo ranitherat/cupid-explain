@@ -1,0 +1,587 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at center, #FFFFFF 0%, #FFECF4 100%);
+    color: #5A5A5A;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= NAVIGATION ================= */
+
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #FACBD5;
+    padding: 18px 0;
+    transition: all 0.4s ease;
+    z-index: 1000;
+    border-bottom: 2px solid #E38594; /* soft darker pink line */
+    
+}
+
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 20px;
+    border: 2px solid #C87987;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #B25A65;
+    font-weight: 0;
+    transition: 0.3s;
+    background-color: rgba(255,255,255,0.2);
+    text-decoration: none;   /* removes underline */
+    font-size: 21px; 
+}
+
+.nav-item:hover {
+    background-color: #FFDBE7;
+}
+
+.nav-item.active {
+    font-weight: 600;
+}
+
+.nav-icon {
+    width: 25px;
+    height: 18px;
+}
+
+/* Transparent state when scrolling down */
+.nav-transparent {
+    background-color: rgba(233, 185, 193, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    text-align: center;
+    padding-top: 140px;
+}
+
+.logo {
+    width: 50%;
+}
+
+.subtitle {
+    margin-top: 20px;
+    font-size: 25px;
+    color: #6E6E6E;
+}
+
+
+/* ================= CARD SECTION ================= */
+
+.card-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.card-image {
+    max-width: 100%;
+    margin-bottom: 100px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    margin-top: auto;
+    background-color: #FACBD5;
+    text-align: center;
+    padding: 18px 0;
+    color: #B25A65;
+    font-weight: 0;
+    border-top: 2px solid #E38594; /* soft darker pink line */
+}
+
+/* ================= POP-UP ================= */
+
+/* Modal container styling */
+.custom-modal {
+    background-color: #FFD6E4; 
+    border: 3px solid #D98D97;
+    border-radius: 20px;
+    color: #B25A65; /* default text color */
+    padding: 15px;
+}
+
+/* Remove default bootstrap table borders */
+.custom-table {
+    border: 2px solid #D98D97;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Header styling */
+.custom-table thead {
+    background-color: #F7C8D3;
+    color: #B05060;
+    font-weight: 600;
+}
+
+/* Table cell styling */
+.custom-table th,
+.custom-table td {
+    border: 1px solid #D98D97;
+    padding: 8px;
+}
+
+/* Modal title */
+.modal-title {
+    font-weight: 600;
+    color: #B95663;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+/* Pink close button */
+.btn-close {
+    filter: hue-rotate(300deg);
+}
+
+.modal-body p {
+    color: #B25A65;
+    text-align: justify;
+}
+
+#cheatModal .custom-table td {
+    color: #B25A65; 
+}
+
+#cheatModal .custom-table th {
+    color: #B25A65; 
+}
+
+#teamModal .custom-table td {
+    color: #B25A65;
+}
+
+#teamModal .custom-table th {
+    color: #B25A65; 
+}
+
+#cheatModal .custom-table {
+    width: 100%;
+    border: 2px solid #D98D97; /* table border */
+    border-radius: 12px;        /* rounded corners */
+    border-collapse: separate;  /* needed for border-radius to work */
+    overflow: hidden;           /* clips corners so border-radius applies */
+}
+
+#teamModal .custom-table {
+    width: 100%;
+    border: 2px solid #D98D97;
+    border-radius: 12px;
+    border-collapse: separate;
+    overflow: hidden;
+}
+
+#aboutModal .modal-header {
+    display: flex;
+    justify-content: center; /* center title */
+    position: relative;      /* allow absolute close button */
+}
+
+#aboutModal .modal-header .btn-close {
+    position: absolute;
+    right: 1rem; /* keeps close button on right */
+}
+
+#aboutModal .modal-header .modal-title {
+    margin: 0 auto; /* center the title inside flex container */
+}
+
+/* ================= FLAGS PAGE ================= */
+
+/* LOGO */
+.nav-logo img {
+    width: 350px;
+    margin-bottom: 25px;
+}
+
+#navbar {
+    text-align: center;
+}
+
+.title-section {
+    padding-top: 350px; /* adjust if needed */
+    text-align: center;
+}
+
+.title-section img {
+    width: 40%;   
+}
+
+/* ================= TOXIC TRAITS GRID ================= */
+
+.flags-grid {
+    margin-top: 60px;
+    padding: 0 20px 100px 20px; /* smaller horizontal padding */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,350px)); /* each column can grow up to 300px */
+    gap: 2rem; /* smaller gap */
+    justify-content: center; /* center the grid horizontally */
+}
+
+
+/* Card Box */
+.flag-card {
+    background-color: #FFD6E4; /* soft pink */
+    border-radius: 35px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+    border: 3px solid #D98D97; /* <-- ADD THIS */
+    height: 350px;       /* fixed height */
+
+}
+
+/* Hover effect */
+.flag-card:hover {
+    transform: scale(1.04);
+}
+
+/* Image inside box */
+.flag-card img {
+    width: 80%;
+    height: auto;
+}
+
+/* Caption hidden by default */
+.flag-card figcaption {
+    display: none;
+    font-size: 16px;
+    margin-top: 10px;
+    color: #B25A65;
+    font-weight: 0;
+    text-align: justify;
+}
+
+/* Active state (when clicked) */
+.flag-card.active img {
+    display: none;
+}
+
+.flag-card.active figcaption {
+    display: block;
+}
+
+.flag-title {
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0.5rem 0 0 0;
+    color: #B25A65; 
+}
+
+
+/* ================= QUIZ PAGE ================= */
+
+
+/* START QUIZ BUTTON */
+.start-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0px;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 1px;
+    background-color: #E38594;
+    color: white;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    margin-top: 20px;
+    border: 3px solid #B25A65;   
+}
+
+.start-btn:hover {
+    background-color: #B25A65;   
+}
+
+/* PLAY ICON */
+.play-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* QUIZ SECTION */
+.quiz-section {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+/* QUIZ BOX */
+.quiz-box {
+    width: 100%;
+    max-width: 750px;
+    background-color: #FFD6E4;
+    border: 3px solid #D98D97;
+    border-radius: 20px;
+    padding: 40px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* QUESTIONS */
+.question {
+    margin-bottom: 35px;
+    font-size: 18px;
+}
+
+.question p {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #B25A65;
+    font-size: 20px;
+}
+
+.question label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    color: #B25A65;
+}
+
+.question input[type="radio"] {
+    margin-right: 8px;
+    margin-left: 20px;
+}
+
+/* BUTTONS */
+.quiz-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.clear-btn {
+    background: transparent;
+    border: 2px solid #B25A65;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #B25A65;
+    font-size: 18px; 
+}
+
+.submit-btn {
+    background: #E38594;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    border: 2px solid #B25A65;
+    font-size: 18px; 
+}
+
+.submit-btn:hover {
+    background: #B25A65;
+}
+
+.clear-btn:hover {
+    background: #FFFF;
+}
+
+.result-box {
+    background-color: #FFD6E4;
+    border: 3px solid #D98D97;
+    border-radius: 30px;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 50px 40px;
+    text-align: center;
+}
+
+.result-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #b34d5c;
+    margin-bottom: 25px;
+}
+
+.result-text {
+    font-size: 18px;
+    color: #a14d59;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.retake-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #E38594;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s ease;
+    border: 2px solid #B25A65;
+}
+
+.retake-btn:hover {
+    background-color: #c96572;
+}
+
+.retake-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ================= HAMBURGER ================= */
+
+.hamburger {
+    display: none;
+    font-size: 28px;
+    color: #B25A65;
+    cursor: pointer;
+    margin-left: 300px;   
+}
+
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100vh;
+    background: #FACBD5;
+    padding: 30px;
+    transition: 0.3s ease;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mobile-menu.show {
+    left: 0;
+}
+
+.close-menu {
+    font-size: 28px;
+    cursor: pointer;
+    color: #B25A65;
+    margin-right: 300px;  
+}
+
+.mobile-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #B25A65;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    /* hide desktop nav */
+    .nav-container {
+        display: none;
+    }
+
+    /* show hamburger */
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-logo {
+        display: none;
+    }
+    
+    .logo {
+    width: 90%;
+    }
+    
+    .subtitle {
+    font-size: 20px;
+	}
+	
+	.flags-grid {
+        grid-template-columns: 1fr; /* one column */
+        gap: 1.5rem; /* optional smaller gap for mobile */
+        padding: 0 20px; /* adjust horizontal padding */
+    }
+    
+    .flag-card {
+        width: 70%;        /* take full width of grid column */
+        height: auto;       /* auto height based on content */
+        padding: 20px;      /* slightly smaller padding */
+        margin: 0 auto;
+    }
+
+    .flag-card img {
+        width: 60%;         /* scale image down a bit */
+        height: auto;
+    }
+    
+    .title-section {
+    padding-top: 150px; /* adjust if needed */
+    text-align: center;
+	}
+
+	.title-section img {
+    width: 70%;   
+	}
+	
+	.flags-grid .flag-card:last-child {
+        margin-bottom: 50px; /* adjust as needed */
+    }
+    
+    .result-box {
+    	width: 70%;
+    	padding: 40px 30px;
+	}
+	
+	.result-title {
+    	font-size: 21px;
+    	font-weight: 800;
+    	color: #b34d5c;
+    	margin-bottom: 25px;
+	}
+
+	.result-text {
+    	font-size: 16px;
+    	color: #a14d59;
+    	line-height: 1.6;
+    	margin-bottom: 25px;
+	}
+    
+}
+
+
+    
+
