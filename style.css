@@ -17,8 +17,10 @@ body {
 
 .hamburger,
 .close-menu {
-    background: none;
+    background: transparent;
     border: none;
+    padding: 0;
+    cursor: pointer;
 }
 
 #navbar {
