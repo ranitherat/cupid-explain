@@ -100,7 +100,7 @@ if (hamburger && mobileMenu && closeMenu) {
     closeMenu.onclick = () => mobileMenu.classList.remove("show");
 }
 
-// ================= iMAGE MAP MOBILE =================
+// ================= IMAGE MAP MOBILE =================
 
 function updateImageMapForMobile() {
     const img = document.getElementById('cardImage');
