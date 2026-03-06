@@ -239,7 +239,7 @@ footer {
     margin-top: 60px;
     padding: 0 20px 100px 20px; /* smaller horizontal padding */
     display: grid;
-    grid-template-columns: repeat(3, minmax(0,350px)); /* each column can grow up to 300px */
+    grid-template-columns: repeat(3, minmax(0,350px)); /* each column can grow up to 350px */
     gap: 2rem; /* smaller gap */
     justify-content: center; /* center the grid horizontally */
 }
