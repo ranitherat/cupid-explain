@@ -28,112 +28,64 @@ document.querySelectorAll('.flag-card').forEach(card => {
 
 // ================= QUIZ FORM =================
 
+// ================= QUIZ FORM =================
 const form = document.getElementById("quizForm");
 
 if (form) {
-  let isDirty = false;
-  let submitting = false;
+    let isDirty = false;
+    let submitting = false; // NEW: flag to track actual form submission
 
-  form.addEventListener("change", function () {
-    const answered = form.querySelector("input[type='radio']:checked");
-    if (answered) isDirty = true;
-  });
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    // 1) Compute score + collect answers
-    let totalScore = 0;
-    const answers = {};
-    for (let i = 1; i <= 10; i++) {
-      const selected = document.querySelector(`input[name="q${i}"]:checked`);
-      if (!selected) {
-        alert("Please answer all questions before submitting 💕");
-        return;
-      }
-      const value = parseInt(selected.value, 10);
-      answers[`q${i}`] = value;
-      totalScore += value;
-    }
-
-    // Optional personal info fields (ensure these exist in your HTML)
-    const name = document.getElementById("name")?.value?.trim() || "";
-    const gender = document.getElementById("gender")?.value || "";
-    const dob = document.getElementById("dob")?.value || "";
-
-    // 2) Build the payload for SheetDB (wrap in { data: [ { ... } ] })
-const payload = {
-  data: [
-    {
-      timestamp: new Date().toISOString(),
-      name,
-      gender,
-      dob,
-      ...answers,
-      score: totalScore
-    }
-  ]
-};
-
-// 3) Post to SheetDB
-try {
-  const res = await fetch("https://sheetdb.io/api/v1/u3ao4hf3qpdjd", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
-
-  const text = await res.text();
-  console.log("SheetDB status:", res.status, res.statusText);
-  console.log("SheetDB raw response:", text);
-
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}: ${text}`);
-  }
-
-  // SheetDB usually returns JSON like { "created": 1 }
-  // We'll try to parse and check:
-  let json = {};
-  try { json = JSON.parse(text); } catch {}
-  if (!json || (json.created !== 1 && json.updated !== 1)) {
-    // Be permissive, but warn in console
-    console.warn("Unexpected SheetDB response:", json || text);
-  }
-
-  // 4) Safe to redirect
-  submitting = true;
-  if (totalScore >= 8) {
-    window.location.href = "green-result.html";
-  } else if (totalScore >= 4) {
-    window.location.href = "mixed-result.html";
-  } else {
-    window.location.href = "red-result.html";
-  }
-} catch (err) {
-  console.error("Error saving to SheetDB:", err);
-  alert("We couldn’t save your response right now. Please try again.");
-}
-  });
-
-  window.addEventListener("beforeunload", function (e) {
-    if (isDirty && !submitting) {
-      e.preventDefault();
-      e.returnValue = "";
-    }
-  });
-
-  document.querySelectorAll(".nav-item").forEach(link => {
-    link.addEventListener("click", function (e) {
-      if (isDirty && !submitting) {
-        const confirmLeave = confirm(
-          "Are you sure? This will refresh the page and all progress will be lost."
-        );
-        if (!confirmLeave) e.preventDefault();
-      }
+    form.addEventListener("change", function () {
+        const answered = form.querySelector("input[type='radio']:checked");
+        if (answered) isDirty = true;
     });
-  });
-}
 
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let totalScore = 0;
+
+        for (let i = 1; i <= 10; i++) {
+            let selected = document.querySelector(`input[name="q${i}"]:checked`); // FIXED: backticks
+
+            if (!selected) {
+                alert("Please answer all questions before submitting 💕");
+                return;
+            }
+
+            totalScore += parseInt(selected.value);
+        }
+
+        // Prevent the "unsaved changes" warning on submit
+        submitting = true;
+
+        if (totalScore >= 8) {
+            window.location.href = "green-result.html";
+        } else if (totalScore >= 4) {
+            window.location.href = "mixed-result.html";
+        } else {
+            window.location.href = "red-result.html";
+        }
+    });
+
+    window.addEventListener("beforeunload", function (e) {
+        if (isDirty && !submitting) {
+            e.preventDefault();
+            e.returnValue = "";
+        }
+    });
+
+    document.querySelectorAll(".nav-item").forEach(link => {
+        link.addEventListener("click", function (e) {
+            if (isDirty && !submitting) {
+                const confirmLeave = confirm(
+                    "Are you sure? This will refresh the page and all progress will be lost."
+                );
+                if (!confirmLeave) e.preventDefault();
+            }
+        });
+    });
+}
 
 // ================= HAMBURGER MENU =================
 const hamburger = document.getElementById("hamburger");
