@@ -499,7 +499,7 @@ fieldset {
     display: block;
     margin-top: 10px;
     font-size: 18px;
-    color: #333;
+	color: #B25A65;
 }
 
 .personal-details input,
@@ -509,6 +509,7 @@ fieldset {
     margin-top: 5px;
     font-size: 18px;
     box-sizing: border-box;
+	color: #757575;
 }
 
 /* ================= HAMBURGER ================= */
