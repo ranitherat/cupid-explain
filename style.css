@@ -509,7 +509,7 @@ fieldset {
     margin-top: 10px;
     font-size: 18px;
 	color: #B25A65;
-	font-weight: bold;
+    font-weight: 600;
 }
 
 .personal-details input,
