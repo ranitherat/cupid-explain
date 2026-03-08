@@ -27,7 +27,7 @@ document.querySelectorAll('.flag-card').forEach(card => {
 
 
 // ================= QUIZ FORM =================
-<script>
+
 const form = document.getElementById("quizForm");
 
 if (form) {
@@ -119,7 +119,7 @@ if (form) {
     });
   });
 }
-</script>
+
 
 // ================= HAMBURGER MENU =================
 const hamburger = document.getElementById("hamburger");
