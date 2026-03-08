@@ -215,6 +215,10 @@ footer {
     margin-bottom: 8px;
 }
 
+.modal-body .team-list,
+.modal-body .team-list strong {
+    color: #B25A65;
+}
 
 
 /* ================= FLAGS PAGE ================= */
