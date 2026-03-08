@@ -42,30 +42,64 @@ if (form) {
         e.preventDefault();
 
         let totalScore = 0;
+        const answers = {}; // Collect answers for Google Sheets
 
         for (let i = 1; i <= 10; i++) {
-            let selected = document.querySelector(`input[name="q${i}"]:checked`); // FIXED: backticks
+            let selected = document.querySelector(`input[name="q${i}"]:checked`);
 
             if (!selected) {
                 alert("Please answer all questions before submitting 💕");
                 return;
             }
 
-            totalScore += parseInt(selected.value);
+            const value = parseInt(selected.value);
+            answers[`q${i}`] = value;
+            totalScore += value;
         }
 
-        // Prevent the "unsaved changes" warning on submit
-        submitting = true;
+        // Collect personal info
+        const name = document.getElementById("name").value;
+        const gender = document.getElementById("gender").value;
+        const dob = document.getElementById("dob").value;
 
-        if (totalScore >= 8) {
-            window.location.href = "green-result.html";
-        } 
-        else if (totalScore >= 4) {
-            window.location.href = "mixed-result.html";
-        } 
-        else {
-            window.location.href = "red-result.html";
-        }
+        // Prepare data for Google Sheets
+        const data = {
+            name,
+            gender,
+            dob,
+            ...answers,
+            score: totalScore
+        };
+
+        // Send data to Google Sheets via Web App
+        fetch("YOUR_WEB_APP_URL_HERE", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(response => {
+            console.log("Response submitted to Google Sheets", response);
+
+            // Prevent the "unsaved changes" warning on submit
+            submitting = true;
+
+            // Redirect based on score
+            if (totalScore >= 8) {
+                window.location.href = "green-result.html";
+            } 
+            else if (totalScore >= 4) {
+                window.location.href = "mixed-result.html";
+            } 
+            else {
+                window.location.href = "red-result.html";
+            }
+        })
+        .catch(err => {
+            console.error("Error submitting to Google Sheets", err);
+            alert("There was an error submitting your responses. Please try again.");
+        });
+
     });
 
     window.addEventListener("beforeunload", function (e) {
@@ -87,7 +121,6 @@ if (form) {
         });
     });
 }
-
 
 // ================= HAMBURGER MENU =================
 const hamburger = document.getElementById("hamburger");
