@@ -495,6 +495,14 @@ fieldset {
 	text-align: center;
 }
 
+.questionnaire legend {
+    font-size: 24px;
+    color: #B25A65;
+    font-weight: bold;
+    margin-bottom: 10px;
+	text-align: center;
+}
+
 /* Each label/input in personal details on its own line */
 .personal-details label {
     display: block;
