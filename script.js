@@ -30,16 +30,21 @@ document.querySelectorAll('.flag-card').forEach(card => {
 const form = document.getElementById("quizForm");
 
 if (form) {
-
     let isDirty = false;
+    let submitting = false; // NEW: flag to track actual form submission
 
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("change", function () {
+        const answered = form.querySelector("input[type='radio']:checked");
+        if (answered) isDirty = true;
+    });
+
+    form.addEventListener("submit", function (e) {
         e.preventDefault();
 
         let totalScore = 0;
 
         for (let i = 1; i <= 10; i++) {
-            let selected = document.querySelector(`input[name="q${i}"]:checked`);
+            let selected = document.querySelector(`input[name="q${i}"]:checked`); // FIXED: backticks
 
             if (!selected) {
                 alert("Please answer all questions before submitting 💕");
@@ -48,6 +53,9 @@ if (form) {
 
             totalScore += parseInt(selected.value);
         }
+
+        // Prevent the "unsaved changes" warning on submit
+        submitting = true;
 
         if (totalScore >= 8) {
             window.location.href = "green-result.html";
@@ -60,13 +68,8 @@ if (form) {
         }
     });
 
-    form.addEventListener("change", function () {
-        const answered = form.querySelector("input[type='radio']:checked");
-        if (answered) isDirty = true;
-    });
-
     window.addEventListener("beforeunload", function (e) {
-        if (isDirty) {
+        if (isDirty && !submitting) {
             e.preventDefault();
             e.returnValue = "";
         }
@@ -74,7 +77,7 @@ if (form) {
 
     document.querySelectorAll(".nav-item").forEach(link => {
         link.addEventListener("click", function (e) {
-            if (isDirty) {
+            if (isDirty && !submitting) {
                 const confirmLeave = confirm(
                     "Are you sure? This will refresh the page and all progress will be lost."
                 );
@@ -82,10 +85,6 @@ if (form) {
                 if (!confirmLeave) e.preventDefault();
             }
         });
-    });
-
-    form.addEventListener("submit", function () {
-        isDirty = false;
     });
 }
 
