@@ -213,19 +213,19 @@ footer {
     color: #B25A65;
 }
 
-.modal-body .team-list {
-    color: #B25A65;
-    line-height: 1.9;
-    font-size: 16px;
+
+#teamModal .team-member {
+    margin-bottom: 20px; /* space between members */
 }
 
-.modal-body .team-list li {
-    margin-bottom: 8px;
+#teamModal .team-name {
+    font-weight: 600;
+    font-size: 18px;
 }
 
-.modal-body .team-list,
-.modal-body .team-list strong {
-    color: #B25A65;
+#teamModal .team-role {
+    font-size: 15px;
+    margin-top: 2px;
 }
 
 
