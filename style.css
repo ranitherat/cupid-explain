@@ -206,16 +206,13 @@ footer {
 
 
 .team-list {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-  color: #B25A65;
-  line-height: 1.8; /* adjusts line spacing */
-  font-size: 16px;
+    color: #B25A65;
+    line-height: 1.9;   /* controls line spacing */
+    font-size: 16px;
 }
 
 .team-list li {
-  margin-bottom: 10px; /* space between each member */
+    margin-bottom: 8px; /* spacing between members */
 }
 
 /* ================= FLAGS PAGE ================= */
