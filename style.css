@@ -481,6 +481,11 @@ fieldset {
     padding: 0;
 }
 
+/* Add spacing below personal details */
+.personal-details {
+    margin-bottom: 30px; /* space between personal info and first question */
+}
+
 /* Personal Details Styling */
 .personal-details legend {
     font-size: 20px;
