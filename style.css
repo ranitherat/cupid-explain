@@ -181,28 +181,12 @@ footer {
     color: #B25A65; 
 }
 
-#teamModal .custom-table td {
-    color: #B25A65;
-}
-
-#teamModal .custom-table th {
-    color: #B25A65; 
-}
-
 #cheatModal .custom-table {
     width: 100%;
     border: 2px solid #D98D97; /* table border */
     border-radius: 12px;        /* rounded corners */
     border-collapse: separate;  /* needed for border-radius to work */
     overflow: hidden;           /* clips corners so border-radius applies */
-}
-
-#teamModal .custom-table {
-    width: 100%;
-    border: 2px solid #D98D97;
-    border-radius: 12px;
-    border-collapse: separate;
-    overflow: hidden;
 }
 
 #aboutModal .modal-header {
@@ -218,6 +202,20 @@ footer {
 
 #aboutModal .modal-header .modal-title {
     margin: 0 auto; /* center the title inside flex container */
+}
+
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  color: #B25A65;
+  line-height: 1.8; /* adjusts line spacing */
+  font-size: 16px;
+}
+
+.team-list li {
+  margin-bottom: 10px; /* space between each member */
 }
 
 /* ================= FLAGS PAGE ================= */
