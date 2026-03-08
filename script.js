@@ -147,3 +147,57 @@ searchInput.addEventListener("input", function() {
         }
     });
 });
+
+// ================= DATABASE =================
+
+const form = document.getElementById("quizForm");
+
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Collect personal info
+    const name = document.getElementById("name").value;
+    const gender = document.getElementById("gender").value;
+    const dob = document.getElementById("dob").value;
+
+    // Collect quiz answers and calculate score
+    let totalScore = 0;
+    const answers = {};
+    for (let i = 1; i <= 10; i++) {
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      if (!selected) {
+        alert(`Please answer question ${i}`);
+        return;
+      }
+      const value = parseInt(selected.value);
+      answers[`q${i}`] = value;
+      totalScore += value;
+    }
+
+    // Prepare data to send
+    const data = {
+      name,
+      gender,
+      dob,
+      ...answers,
+      score: totalScore
+    };
+
+    // Send to Google Sheets via Web App
+    fetch("YOUR_WEB_APP_URL_HERE", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(response => {
+        alert("Your responses have been submitted! Your score: " + totalScore);
+        form.reset();
+      })
+      .catch(err => {
+        console.error(err);
+        alert("There was an error submitting your quiz. Please try again.");
+      });
+  });
+}
