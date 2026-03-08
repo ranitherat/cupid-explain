@@ -61,44 +61,58 @@ if (form) {
     const gender = document.getElementById("gender")?.value || "";
     const dob = document.getElementById("dob")?.value || "";
 
-    // 2) Build the row payload for SheetDB (must be wrapped in { data: {...} })
-    const payload = {
-      data: {
-        timestamp: new Date().toISOString(),
-        name,
-        gender,
-        dob,
-        ...answers,
-        score: totalScore
-      }
-    };
-
-    // 3) Post to SheetDB
-    try {
-      const res = await fetch("https://sheetdb.io/api/v1/u3ao4hf3qpdjd", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const text = await res.text();
-      // SheetDB typically returns JSON like { "created": 1 }
-      // We'll be permissive here:
-      try { JSON.parse(text); } catch { /* non-JSON is rare, but continue */ }
-
-      // 4) Safe to redirect
-      submitting = true;
-      if (totalScore >= 8) {
-        window.location.href = "green-result.html";
-      } else if (totalScore >= 4) {
-        window.location.href = "mixed-result.html";
-      } else {
-        window.location.href = "red-result.html";
-      }
-    } catch (err) {
-      console.error("Error saving to SheetDB:", err);
-      alert("We couldn’t save your response right now. Please try again.");
+    // 2) Build the payload for SheetDB (wrap in { data: [ { ... } ] })
+const payload = {
+  data: [
+    {
+      timestamp: new Date().toISOString(),
+      name,
+      gender,
+      dob,
+      ...answers,
+      score: totalScore
     }
+  ]
+};
+
+// 3) Post to SheetDB
+try {
+  const res = await fetch("https://sheetdb.io/api/v1/u3ao4hf3qpdjd", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const text = await res.text();
+  console.log("SheetDB status:", res.status, res.statusText);
+  console.log("SheetDB raw response:", text);
+
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}: ${text}`);
+  }
+
+  // SheetDB usually returns JSON like { "created": 1 }
+  // We'll try to parse and check:
+  let json = {};
+  try { json = JSON.parse(text); } catch {}
+  if (!json || (json.created !== 1 && json.updated !== 1)) {
+    // Be permissive, but warn in console
+    console.warn("Unexpected SheetDB response:", json || text);
+  }
+
+  // 4) Safe to redirect
+  submitting = true;
+  if (totalScore >= 8) {
+    window.location.href = "green-result.html";
+  } else if (totalScore >= 4) {
+    window.location.href = "mixed-result.html";
+  } else {
+    window.location.href = "red-result.html";
+  }
+} catch (err) {
+  console.error("Error saving to SheetDB:", err);
+  alert("We couldn’t save your response right now. Please try again.");
+}
   });
 
   window.addEventListener("beforeunload", function (e) {
