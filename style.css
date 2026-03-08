@@ -380,8 +380,22 @@ footer {
     display: block;
     margin-bottom: 8px;
     cursor: pointer;
-    color: #B25A65;
+	
+    padding: 8px 12px;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid #dd8190;
+    transition: all 0.2s ease;
 }
+
+.question label:hover {
+    background-color: #ffeef0;
+    transform: translateX(5px); }
+
+.question label[type="radio"]:checked {
+    width: 18px;
+    height: 18px;
+    accent-color: #d98d97; }
 
 .question input[type="radio"] {
     margin-right: 8px;
