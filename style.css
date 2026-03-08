@@ -204,6 +204,14 @@ footer {
     margin: 0 auto; /* center the title inside flex container */
 }
 
+#teamModal .modal-body {
+    color: #B25A65;
+}
+
+#teamModal .modal-body li,
+#teamModal .modal-body strong {
+    color: #B25A65;
+}
 
 .modal-body .team-list {
     color: #B25A65;
