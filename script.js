@@ -73,33 +73,47 @@ if (form) {
         };
 
         // Send data to Google Sheets via Web App
-        fetch("https://script.google.com/macros/s/AKfycbw-62Fpsj1QU53L5O62jYUkOKY058CMWycOiL99L8MoDwaLAvX1Jhf2UUXowgLingAdNQ/exec", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(response => {
-            console.log("Response submitted to Google Sheets", response);
+        // Send data to Google Sheets via Web App
+fetch("https://script.google.com/macros/s/AKfycbw-62Fpsj1QU53L5O62jYUkOKY058CMWycOiL99L8MoDwaLAvX1Jhf2UUXowgLingAdNQ/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+})
+.then(async (res) => {
+    // Log for debugging
+    console.log("Response status:", res.status, res.statusText);
+    const raw = await res.text();
+    console.log("Raw response:", raw);
 
-            // Prevent the "unsaved changes" warning on submit
-            submitting = true;
+    // Try to parse JSON
+    let json;
+    try {
+        json = JSON.parse(raw);
+    } catch (e) {
+        throw new Error(`Non-JSON response (status ${res.status}): ${raw}`);
+    }
 
-            // Redirect based on score
-            if (totalScore >= 8) {
-                window.location.href = "green-result.html";
-            } 
-            else if (totalScore >= 4) {
-                window.location.href = "mixed-result.html";
-            } 
-            else {
-                window.location.href = "red-result.html";
-            }
-        })
-        .catch(err => {
-            console.error("Error submitting to Google Sheets", err);
-            alert("There was an error submitting your responses. Please try again.");
-        });
+    if (!res.ok || json.status !== "success") {
+        const msg = json?.message || `Server error (status ${res.status})`;
+        throw new Error(msg);
+    }
+
+    // Prevent the "unsaved changes" warning on submit
+    submitting = true;
+
+    // Redirect based on score
+    if (totalScore >= 8) {
+        window.location.href = "green-result.html";
+    } else if (totalScore >= 4) {
+        window.location.href = "mixed-result.html";
+    } else {
+        window.location.href = "red-result.html";
+    }
+})
+.catch(err => {
+    console.error("Error submitting to Google Sheets:", err);
+    alert("There was an error submitting your responses. Please try again.\n\n" + err.message);
+});
 
     });
 
