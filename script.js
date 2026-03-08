@@ -128,3 +128,22 @@ function updateImageMapForMobile() {
 window.addEventListener('load', updateImageMapForMobile);
 // Run on resize
 window.addEventListener('resize', updateImageMapForMobile);
+
+// ================= SEARCH BAR =================
+
+const searchInput = document.getElementById("flagSearch");
+const flagCards = document.querySelectorAll(".flag-card");
+
+searchInput.addEventListener("input", function() {
+    const query = searchInput.value.toLowerCase();
+
+    flagCards.forEach(card => {
+        const title = card.querySelector(".flag-title").textContent.toLowerCase();
+        
+        if (title.includes(query)) {
+            card.style.display = ""; // show card
+        } else {
+            card.style.display = "none"; // hide card
+        }
+    });
+});
