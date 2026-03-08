@@ -474,6 +474,38 @@ footer {
     height: 20px;
 }
 
+/* Remove default fieldset border and padding */
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Personal Details Styling */
+.personal-details legend {
+    font-size: 20px;
+    color: #B25A65;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Each label/input in personal details on its own line */
+.personal-details label {
+    display: block;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.personal-details input,
+.personal-details select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
 /* ================= HAMBURGER ================= */
 
 .hamburger {
