@@ -185,7 +185,7 @@ if (form) {
     };
 
     // Send to Google Sheets via Web App
-    fetch("YOUR_WEB_APP_URL_HERE", {
+    fetch("https://script.google.com/macros/s/AKfycbw-62Fpsj1QU53L5O62jYUkOKY058CMWycOiL99L8MoDwaLAvX1Jhf2UUXowgLingAdNQ/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
