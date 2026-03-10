@@ -18,32 +18,16 @@ if (navbar) {
 }
 
 // ================= TOOLTIP IMAGE MAP =================
-document.addEventListener("DOMContentLoaded", function () {
-    const areas = document.querySelectorAll('area[title]');
-    
-    areas.forEach(area => {
-        // Initialize tooltip
-        const tooltip = new bootstrap.Tooltip(area, {
-            trigger: 'manual', // we’ll show/hide manually
-            placement: 'top'
-        });
-        
-        // Show tooltip on mouseover
-        area.addEventListener('mousemove', e => {
-            tooltip.show();
-            
-            // Move tooltip to cursor position
-            const tooltipEl = document.querySelector('.tooltip.show');
-            if (tooltipEl) {
-                tooltipEl.style.position = 'absolute';
-                tooltipEl.style.left = e.pageX + 'px';
-                tooltipEl.style.top = (e.pageY - 30) + 'px'; // 30px above cursor
-            }
-        });
-        
-        area.addEventListener('mouseleave', () => {
-            tooltip.hide();
-        });
+const tooltip = document.getElementById('fixedTooltip');
+const areas = document.querySelectorAll('area[data-tooltip]');
+
+areas.forEach(area => {
+    area.addEventListener('mouseenter', () => {
+        tooltip.innerText = area.dataset.tooltip;
+        tooltip.style.display = 'block';
+    });
+    area.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
     });
 });
 
