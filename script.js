@@ -20,8 +20,37 @@ if (navbar) {
 // ================= TOOLTIP IMAGE MAP =================
 document.addEventListener("DOMContentLoaded", function () {
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('area[title]'));
+
     tooltipTriggerList.forEach(function (el) {
-        new bootstrap.Tooltip(el);
+        new bootstrap.Tooltip(el, {
+            trigger: 'hover',
+            placement: 'top', // default but we override below
+            customClass: 'center-tooltip',
+            popperConfig: {
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 0] // ignore default offset
+                        }
+                    },
+                    {
+                        name: 'computeStyles',
+                        options: {
+                            adaptive: false // prevents automatic positioning
+                        }
+                    },
+                    {
+                        name: 'flip',
+                        enabled: false // disables repositioning
+                    },
+                    {
+                        name: 'preventOverflow',
+                        enabled: false
+                    }
+                ]
+            }
+        });
     });
 });
 
