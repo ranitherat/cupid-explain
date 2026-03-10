@@ -17,6 +17,13 @@ if (navbar) {
     });
 }
 
+// ================= TOOLTIP IMAGE MAP =================
+document.addEventListener("DOMContentLoaded", function () {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('area[title]'));
+    tooltipTriggerList.forEach(function (el) {
+        new bootstrap.Tooltip(el);
+    });
+});
 
 // ================= FLAG CARD =================
 document.querySelectorAll('.flag-card').forEach(card => {
