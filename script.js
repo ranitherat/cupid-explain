@@ -27,8 +27,6 @@ document.querySelectorAll('.flag-card').forEach(card => {
 
 
 // ================= QUIZ FORM =================
-
-// ================= QUIZ FORM =================
 const form = document.getElementById("quizForm");
 
 if (form) {
