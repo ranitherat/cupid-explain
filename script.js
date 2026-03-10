@@ -18,12 +18,9 @@ if (navbar) {
 }
 
 // ================= TOOLTIP IMAGE MAP =================
-// Enable tooltips on image map areas
 document.addEventListener("DOMContentLoaded", function () {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('area[title]'));
-    tooltipTriggerList.forEach(function (el) {
-        new bootstrap.Tooltip(el);
-    });
+    const areas = document.querySelectorAll('area[title]');
+    areas.forEach(area => new bootstrap.Tooltip(area));
 });
 
 // ================= FLAG CARD =================
