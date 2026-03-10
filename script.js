@@ -18,16 +18,22 @@ if (navbar) {
 }
 
 // ================= TOOLTIP IMAGE MAP =================
-const tooltip = document.getElementById('fixedTooltip');
+const cursorTooltip = document.getElementById('cursorTooltip');
 const areas = document.querySelectorAll('area[data-tooltip]');
 
 areas.forEach(area => {
-    area.addEventListener('mouseenter', () => {
-        tooltip.innerText = area.dataset.tooltip;
-        tooltip.style.display = 'block';
+    area.addEventListener('mouseenter', (e) => {
+        cursorTooltip.innerText = area.dataset.tooltip;
+        cursorTooltip.style.display = 'block';
     });
+    
     area.addEventListener('mouseleave', () => {
-        tooltip.style.display = 'none';
+        cursorTooltip.style.display = 'none';
+    });
+    
+    area.addEventListener('mousemove', (e) => {
+        cursorTooltip.style.left = e.clientX + 15 + 'px'; // 15px offset from cursor
+        cursorTooltip.style.top = e.clientY + 15 + 'px';
     });
 });
 
